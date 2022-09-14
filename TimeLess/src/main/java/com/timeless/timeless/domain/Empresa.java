@@ -10,7 +10,7 @@ public class Empresa {
     private String phone;
     private String address;
     private Date createdAt;
-    private Date updateAt;
+    private Date updatedAt;
 
     public Empresa(long id, String name, String document, String phone, String address, Date createdAt, Date updateAt) {
         this.id = id;
@@ -19,7 +19,10 @@ public class Empresa {
         this.phone = phone;
         this.address = address;
         this.createdAt = createdAt;
-        this.updateAt = updateAt;
+        this.updatedAt = updateAt;
+    }
+    public Empresa(){
+
     }
 
     public long getId() {
@@ -70,12 +73,12 @@ public class Empresa {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdateAt() {
-        return updateAt;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
+    public void setUpdatedAt(Date updateAt) {
+        this.updatedAt = updateAt;
     }
 }
 
