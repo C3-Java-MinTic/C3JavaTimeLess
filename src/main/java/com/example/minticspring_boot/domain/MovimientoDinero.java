@@ -1,28 +1,44 @@
 package com.example.minticspring_boot.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import javax.persistence.*;
 import java.util.Date;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "movimientodinero")
 public class MovimientoDinero {
 
-    @Getter @Setter
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Getter @Setter
+
+    @Column(name="concept")
     private String concept;
-    @Getter @Setter
+
+    @Column(name="amount")
     private float amount;
-    @Getter @Setter
+
+    @Column(name="createdAt")
     private Date createdAt;
-    @Getter @Setter
+
+    @Column(name="updateAt")
     private Date updateAt;
 
-    public MovimientoDinero(long id, String concept, float amount, Date createdAt, Date updateAt) {
-        this.id = id;
-        this.concept = concept;
-        this.amount = amount;
-        this.createdAt = createdAt;
-        this.updateAt = updateAt;
-    }
+    @ManyToOne
+    @JoinColumn(name="empleado-movimientodinero")
+    private Empleado empleado;
+
+    @ManyToOne
+    @JoinColumn(name="empresa-movimientodinero")
+    private Empresa empresa;
+
+
 }

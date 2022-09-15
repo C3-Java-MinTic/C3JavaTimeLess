@@ -1,42 +1,38 @@
 package com.example.minticspring_boot.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name= "empresa")
-public class Empresa {
+@Table(name= "profile")
+public class Profile {
 
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="name")
-    private String name;
-
-    @Column(name="document")
-    private String document;
+    @Column(name="image")
+    private String image;
 
     @Column(name="phone")
     private String phone;
 
-    @Column(name="address")
-    private String address;
-
     @Column(name="createdAt")
     private LocalDate createdAt;
 
-    @Column(name="updateAt")
-    private LocalDate updateAt;
+    @Column(name="updatedAt")
+    private LocalDate updatedAt;
+
+    @OneToOne(mappedBy = "profile")
+    private Empleado empleado;
 
 }
