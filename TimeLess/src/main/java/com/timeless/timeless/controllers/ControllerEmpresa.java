@@ -54,11 +54,11 @@ public class ControllerEmpresa {
     }
 
     @DeleteMapping("/enterprises/{id}")
-    void deleteOne(@PathVariable("id") long id){
-        Empresa deletedEmpresa = new Empresa();
-        for(int i=0;i<serviceEmpresa.getListaEmpresas().toArray().length;i++){
+    void deleteOne(@PathVariable long id){
+        for(long i=0;i<serviceEmpresa.getListaEmpresas().toArray().length;i++){
             if(i==id){
-                deletedEmpresa = serviceEmpresa.getListaEmpresas().remove((int)i);
+                serviceEmpresa.getListaEmpresas().remove((int)i);
+                System.out.println(i);
             }
         }
     }
