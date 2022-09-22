@@ -32,13 +32,15 @@ public class MovimientoDinero {
     @Column(name="updateAt")
     private Date updateAt;
 
-    @ManyToOne
-    @JoinColumn(name="empleado-movimientodinero")
-    private Empleado empleado;
+    @JoinColumn(name="id_empleado", referencedColumnName = "id", updatable = true, insertable = true)
+    @ManyToOne()
+    private Empleado idEmpleado;
 
-    @ManyToOne
-    @JoinColumn(name="empresa-movimientodinero")
-    private Empresa empresa;
+    @JoinColumn(name="id_empresa", referencedColumnName = "id", updatable = true, insertable = true)
+    @ManyToOne()
+    private Empresa idEmpresa;
+
+
 
 
 }

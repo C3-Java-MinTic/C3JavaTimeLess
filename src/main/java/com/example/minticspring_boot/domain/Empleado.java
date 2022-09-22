@@ -1,12 +1,15 @@
 package com.example.minticspring_boot.domain;
 
+import com.example.minticspring_boot.repository.Permisos;
+import com.example.minticspring_boot.util.Enum_RoleName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Collection;
 
 
 @NoArgsConstructor
@@ -23,8 +26,12 @@ public class Empleado {
     private long id;
 
 
-    @Column(name="email")
+    @Column(name="email", unique = true)
     private String email;
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Enum_RoleName role;
 
     @Column(name="updatedAt")
     private LocalDate updatedAt;
@@ -32,16 +39,21 @@ public class Empleado {
     @Column(name="createdAt")
     private LocalDate createdAt;
 
-    @ManyToOne
-    @JoinColumn(name="empresa-empleados")
-    private Empresa empresa;
+    @JoinColumn(name="id_empresa", referencedColumnName = "id")
+    @ManyToOne()
+    private Empresa idEmpresa;
 
-    @OneToMany(mappedBy = "empleado")
-    private List<MovimientoDinero> movimientodineros;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
+    @JsonIgnore
+    private Collection<Permisos> permisosCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")
+    private Collection<MovimientoDinero> movimientoDineroCollection;
 
     @OneToOne
-    @JoinColumn(name="empleado-profile")
+    @JoinColumn(name = "FK_Profile")
     private Profile profile;
+
 
 
 

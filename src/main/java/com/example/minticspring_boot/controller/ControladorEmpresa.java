@@ -1,9 +1,11 @@
 package com.example.minticspring_boot.controller;
 
+import com.example.minticspring_boot.domain.Empleado;
 import com.example.minticspring_boot.domain.Empresa;
 import com.example.minticspring_boot.services.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,5 +50,30 @@ public class ControladorEmpresa {
 
     }
 
+    @PutMapping(value="/update/{id}/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Empresa> actualizarEmpresa(@PathVariable Long id, @RequestBody Empresa empresa){
+
+       try{
+           Empresa empresa1 = empresaService.findById(id).get();
+           empresa1.setName(empresa.getName());
+           empresa1.setAddress(empresa.getAddress());
+           empresa1.setDocument(empresa.getDocument());
+           empresa1.setPhone(empresa.getPhone());
+           return new ResponseEntity<Empresa>(empresaService.create(empresa1), HttpStatus.OK);
+       } catch (Exception e){
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+    }
+
+    @PatchMapping(value="/update/{id}/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Empresa> actualizacionParcialNombre(@PathVariable Long id, @PathVariable String name ){
+        try{
+            Empresa empresa = empresaService.findById(id).get();
+            empresa.setName(name);
+            return new ResponseEntity<Empresa>(empresaService.create(empresa), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

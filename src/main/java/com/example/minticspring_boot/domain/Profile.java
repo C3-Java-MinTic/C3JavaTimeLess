@@ -1,11 +1,13 @@
 package com.example.minticspring_boot.domain;
 
+import com.example.minticspring_boot.repository.Permisos;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,7 +34,9 @@ public class Profile {
     @Column(name="updatedAt")
     private LocalDate updatedAt;
 
-    @OneToOne(mappedBy = "profile")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "profile")
     private Empleado empleado;
+
+
 
 }

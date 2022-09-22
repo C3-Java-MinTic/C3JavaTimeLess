@@ -1,11 +1,14 @@
 package com.example.minticspring_boot.domain;
 
+import com.example.minticspring_boot.repository.Permisos;
+import com.example.minticspring_boot.util.Enum_RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @NoArgsConstructor
@@ -21,10 +24,10 @@ public class Empresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="name")
+    @Column(name="name", unique = true)
     private String name;
 
-    @Column(name="document")
+    @Column(name="document", unique = true)
     private String document;
 
     @Column(name="phone")
@@ -38,5 +41,13 @@ public class Empresa {
 
     @Column(name="updateAt")
     private LocalDate updateAt;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpresa")
+    private Collection<Empleado> empleadoCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpresa")
+    private Collection<MovimientoDinero> movimientoDineroCollection;
+
+
 
 }
