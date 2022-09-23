@@ -18,13 +18,18 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
-    @Autowired
-    private EmpleadoRepository empleadoRepository;
-
     // crea una empresa nueva
-    public Empresa create(Empresa empresa){
-        return empresaRepository.save(empresa);
+    public Boolean crearNuevaEmpresa(Empresa empresa){
 
+        try {
+            empresaRepository.save(empresa);
+        }catch (Exception e){
+
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+        
+        
     }
 
     //Lista todas las empresas

@@ -1,15 +1,15 @@
 package com.example.minticspring_boot.domain;
 
-import com.example.minticspring_boot.repository.Permisos;
-import com.example.minticspring_boot.util.Enum_RoleName;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
-import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Collection;
-import java.util.List;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,10 +37,12 @@ public class Empresa {
     private String address;
 
     @Column(name="createdAt")
-    private LocalDate createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createdAt;
 
     @Column(name="updateAt")
-    private LocalDate updateAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date updateAt;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpresa")
     private Collection<Empleado> empleadoCollection;

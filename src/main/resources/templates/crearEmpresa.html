@@ -9,28 +9,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Nabla&family=Rubik+Distressed&family=Rubik+Maze&family=Vollkorn&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <title>Gestión Ingresos y Egresos | Crear Empleados</title>
+    <title>Gestión Ingresos y Egresos | Crear Empresa</title>
 </head>
 <body>
     <main>
         <div class="d-flex flex-column align-items-center px-4 py-5 my-5 text-center">
-            <h1 class="display-7 fw-bold mb-3">Crear Empleado</h1>
-            <form class="d-flex flex-column gap-3" th:action="@{/minticspring_boot/empleado/insertarEmpleadoRol}" th:method="post" th:object="${crearemp}">
-                <input th:field="*{email}" class="form-control" type="text" placeholder="Correo"/>
-                <select  th:field="*{role}" class="form-select" aria-label="Default select example">
-                    <option th:value="'Admin'" th:text="Admin"></option>
-                    <option th:value="'Operario'" th:text="Operario"></option>
-                </select>
-               
-                <div th:object="${empresaemp}">
-                    <select class="form-select" aria-label="Default select example">
-                        <option th:each="empresa : ${empresaemp}" th:value="${empresa}" th:text="${empresa}"></option>
-      
-                    </select>
-                </div>
-                 
-            
-
+            <h1 class="display-7 fw-bold mb-3">Crear Empresa</h1>
+            <form class="d-flex flex-column gap-3" th:action="@{/minticspring_boot/empresa/crearEmpresa}" th:method="post" th:object="${crearempresa}">
+                <input th:field="*{name}" class="form-control" type="text" placeholder="Nombre Empresa"/>
+                <input th:field="*{document}" class="form-control" type="text" placeholder="Documento"/>
+                <input th:field="*{phone}" class="form-control" type="text" placeholder="Celular"/>
+                <input th:field="*{address}" class="form-control" type="text" placeholder="Dirección Empresa"/>
+                <input type="date" th:field="*{createdAt}" class="form-control"/>
+                <input type="date" th:field="*{updateAt}" class="form-control"/>
+              
+                                 
                 <button class="btn btn-primary" type="submit"> Crear</button>
             </form>
 

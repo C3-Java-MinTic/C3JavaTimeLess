@@ -26,9 +26,17 @@ public class EmpleadoService {
 
     // crear un empleado nuevo
 
-    public Empleado crearNuevoEmpleado(Empleado empleado){
+    public Boolean crearNuevoEmpleado(Empleado empleado){
+
+        try {
+            empleadoRepository.save(empleado);
+        }catch (Exception e){
+
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
         
-        return empleadoRepository.save(empleado);
+        
     }
 
     //Listar todos los empleados
@@ -41,6 +49,11 @@ public class EmpleadoService {
     public void delete(Empleado empleado){
 
         empleadoRepository.delete(empleado);
+    }
+
+    public void deleteEmpleadoById (Long id){
+
+        empleadoRepository.deleteById(id);
     }
 
     //Buscar un empleado por id
@@ -71,6 +84,13 @@ public class EmpleadoService {
 
         return Boolean.TRUE;
 
+    }
+
+    public Empleado buscarEmpleadoId(Long id){
+
+        Empleado empTemp = empleadoRepository.findById(id).orElse(null);
+
+        return empTemp;
     }
 
     //public boolean insertarEmpleado(Empleado empleado){

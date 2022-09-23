@@ -1,8 +1,6 @@
 package com.example.minticspring_boot.controller;
 import com.example.minticspring_boot.domain.Empleado;
-import com.example.minticspring_boot.domain.Empresa;
 import com.example.minticspring_boot.services.EmpleadoService;
-import com.example.minticspring_boot.util.Enum_RoleName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,8 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.net.URI;
-import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -24,16 +21,23 @@ public class EmpleadoController {
     private EmpleadoService empleadoService;
 
 // Metodo POST para crear un nuevo empleado
-    @PostMapping
-    private ResponseEntity<Empleado> guardarEmpleado(@RequestBody Empleado empleado){
-        Empleado empleado1 = empleadoService.crearNuevoEmpleado(empleado);
+    @PostMapping (path="crearEmpleado", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Empleado> crearEmpleado(@RequestBody Empleado empleado){
+        
+        boolean salida = empleadoService.crearNuevoEmpleado(empleado);
+        
+        if(salida == true){
 
-        try{
-            return ResponseEntity.created(new URI("/minticspring_boot/empleado"+empleado1.getId())).body(empleado1);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return new ResponseEntity<Empleado>(empleado, HttpStatus.OK);
+
+        } else{
+
+            return new ResponseEntity("Error de ejecución", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+
+
+        }
+    
 
     //Método Get para listar todos los empleados
 
@@ -43,10 +47,10 @@ public class EmpleadoController {
     }
 
     //Eliminar un empleado
-    @DeleteMapping
-    private ResponseEntity<Void> eliminarEmpleado(@RequestBody Empleado empleado){
-        empleadoService.delete(empleado);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/eliminarEmpleado/{id}")
+    private RedirectView eliminarEmpleado(@PathVariable("id") Long id){
+        empleadoService.deleteEmpleadoById(id);
+        return new RedirectView("/intro");
     }
 
     //Obtener un empleado por id
@@ -58,19 +62,20 @@ public class EmpleadoController {
 
 
     //Metodo Put Actualizar un empleado
-    @PutMapping(value="/update/{id}/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Empleado> actualizarEmpleado(@PathVariable Long id, @RequestBody Empleado empleado){
+    @PutMapping(path="/actualizarEmpleado")
+    public RedirectView actualizarEmpleado(@ModelAttribute Empleado empleado, Model modelo){
 
-        try{
-            Empleado empleado1 = empleadoService.encontrarporId(id).get();
-            empleado1.setEmail(empleado.getEmail());
-            empleado1.setUpdatedAt(empleado.getUpdatedAt());
-            empleado1.setCreatedAt(empleado.getCreatedAt());
-            return new ResponseEntity<Empleado>(empleadoService.crearNuevoEmpleado(empleado1), HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        modelo.addAttribute(empleado);
+        if(empleadoService.crearNuevoEmpleado(empleado).equals(Boolean.TRUE)){
+            return new RedirectView("/intro");
+        } else {
+
+            return new RedirectView("/error");
         }
+
+
     }
+    
 
     //@PostMapping
     //@RequestMapping(value = "/insertarEmpleadoRol", method = RequestMethod.POST)
@@ -93,16 +98,16 @@ public class EmpleadoController {
   }
 
     //Metodo Patch
-    @PatchMapping(value="/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Empleado> actualizacionParcialEmpleado(@PathVariable Long id, @PathVariable String email, @PathVariable LocalDate createdAt, @PathVariable LocalDate updatedAt){
-        try{
-            Empleado empleado = empleadoService.encontrarporId(id).get();
-            empleado.setEmail(email);
-            empleado.setCreatedAt(createdAt);
-            empleado.setUpdatedAt(updatedAt);
-            return new ResponseEntity<Empleado>(empleadoService.crearNuevoEmpleado(empleado), HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    //@PatchMapping(value="/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    //public ResponseEntity<Empleado> actualizacionParcialEmpleado(@PathVariable Long id, @PathVariable String email, @PathVariable LocalDate createdAt, @PathVariable LocalDate updatedAt){
+        //try{
+            //Empleado empleado = empleadoService.encontrarporId(id).get();
+            //empleado.setEmail(email);
+            //empleado.setCreatedAt(createdAt);
+            //empleado.setUpdatedAt(updatedAt);
+            //return new ResponseEntity<Empleado>(empleadoService.crearNuevoEmpleado(empleado), HttpStatus.OK);
+        //} catch (Exception e){
+            //return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        //}
+    //}
 }
