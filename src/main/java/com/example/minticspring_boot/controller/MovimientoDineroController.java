@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.net.URI;
 import java.util.Date;
@@ -31,6 +33,14 @@ public class MovimientoDineroController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    //Metodo para crear un nuevo movimiento desde frontend
+    @PostMapping(path = "/insertarMovimiento")
+    public void insertarMovimiento(@ModelAttribute MovimientoDinero movimientoDinero, Model modelo){
+        modelo.addAttribute(movimientoDinero);
+        movimientoDineroService.crearNuevoMovimiento(movimientoDinero);
+        //return new RedirectView("/intro");
     }
 
     //Metodo Get para listar todos los movimientos
