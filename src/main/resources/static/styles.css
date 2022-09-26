@@ -1,0 +1,15 @@
+.textinonerow{
+    height: auto;  
+}
+.textinonerow p{
+    margin:0;
+    padding:0;
+    margin-left: 20px;
+    font-size: 15px;
+    display: inline;
+    line-height: 20px;
+}
+
+.textinonerow .texttwo{
+    font-size:15px;
+}

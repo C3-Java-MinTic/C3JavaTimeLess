@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Nabla&family=Rubik+Distressed&family=Rubik+Maze&family=Vollkorn&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <title>Gestión Ingresos y Egresos | Crear Empleados</title>
+</head>
+<body>
+    <main>
+        <div class="d-flex flex-column align-items-center px-4 py-5 my-5 text-center">
+            <h1 class="display-7 fw-bold mb-3">Crear Empleado</h1>
+            <form class="d-flex flex-column gap-3" th:action="@{/minticspring_boot/empleado/insertarEmpleadoRol}" th:method="post" th:object="${crearemp}">
+                <input th:field="*{email}" class="form-control" type="text" placeholder="Correo"/>
+                <select  th:field="*{role}" class="form-select" aria-label="Default select example">
+                    <option th:value="'Admin'" th:text="Admin"></option>
+                    <option th:value="'Operario'" th:text="Operario"></option>
+                </select>
+               
+                <div th:object="${empresaemp}">
+                    <select class="form-select" aria-label="Default select example">
+                        <option th:each="empresa : ${empresaemp}" th:value="${empresa}" th:text="${empresa}"></option>
+
+                    </select>
+                </div>
+                 
+            
+
+                <button class="btn btn-primary" type="submit"> Crear</button>
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>
