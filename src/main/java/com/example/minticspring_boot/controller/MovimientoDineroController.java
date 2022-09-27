@@ -24,7 +24,7 @@ public class MovimientoDineroController {
     private MovimientoDineroService movimientoDineroService;
 
     //Metodo Post para crear un nuevo movimiento
-    @PostMapping
+    @PostMapping(path="/guardarMovimientoNuevo")
     private ResponseEntity<MovimientoDinero> guardarMovimientoNuevo(@RequestBody MovimientoDinero movimientoDinero){
         MovimientoDinero movimientoDinero1 = movimientoDineroService.crearNuevoMovimiento(movimientoDinero);
 
@@ -37,10 +37,10 @@ public class MovimientoDineroController {
 
     //Metodo para crear un nuevo movimiento desde frontend
     @PostMapping(path = "/insertarMovimiento")
-    public void insertarMovimiento(@ModelAttribute MovimientoDinero movimientoDinero, Model modelo){
+    public RedirectView insertarMovimiento(@ModelAttribute MovimientoDinero movimientoDinero, Model modelo){
         modelo.addAttribute(movimientoDinero);
         movimientoDineroService.crearNuevoMovimiento(movimientoDinero);
-        //return new RedirectView("/intro");
+        return new RedirectView("/intro");
     }
 
     //Metodo Get para listar todos los movimientos
@@ -49,11 +49,18 @@ public class MovimientoDineroController {
         return ResponseEntity.ok(movimientoDineroService.obtenerTodosLosMovimientos());
     }
 
-    //Metodo Delete para eliminar un empleado
+    //Metodo Delete para eliminar un movimiento desde Postman
     @DeleteMapping
     private ResponseEntity<Void> eliminarMovimiento(@RequestBody MovimientoDinero movimientoDinero){
         movimientoDineroService.borrarMovimiento(movimientoDinero);
         return ResponseEntity.ok().build();
+    }
+
+    //Eliminar un movimiento Theamleaf
+    @DeleteMapping("/eliminarMovimiento/{id}")
+    private RedirectView eliminarMovimiento(@PathVariable("id") Long id){
+        movimientoDineroService.borrarMovimientoById(id);
+        return new RedirectView("/intro");
     }
 
     //Metodo para obtener un empleado por id
@@ -76,6 +83,15 @@ public class MovimientoDineroController {
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    //Metodo Put Actualizar un movimiento con Thymeleaf
+    @PutMapping(path="/actualizarMovimiento")
+    public RedirectView actualizarMovimiento(@ModelAttribute MovimientoDinero movimiento, Model modelo){
+
+        modelo.addAttribute(movimiento);
+        movimientoDineroService.crearNuevoMovimiento(movimiento);
+        return new RedirectView("/intro");
     }
 
     //Metodo Patch actualizar datos

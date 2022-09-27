@@ -33,8 +33,19 @@ public class MovimientoDineroService {
         movimientoDineroRepository.delete(movimientoDinero);
     }
 
+    //Eliminar un movimiento de dinero por id
+    public void borrarMovimientoById(Long id){
+        movimientoDineroRepository.deleteById(id);
+    }
+
     //Buscar un movimiento por id
     public Optional<MovimientoDinero> encontrarMovimientoPorId(Long id){
         return movimientoDineroRepository.findById(id);
+    }
+    public MovimientoDinero buscarMovimienotId(Long id){
+
+        MovimientoDinero movTemp = movimientoDineroRepository.findById(id).orElse(null);
+
+        return movTemp;
     }
 }

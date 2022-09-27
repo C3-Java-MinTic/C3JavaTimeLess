@@ -12,24 +12,30 @@
     <title>Gestión Ingresos y Egresos | Crear Movimiento</title>
 </head>
 <body>
-    <main>
+<main>
+    <div class="d-flex flex-column align-items-center px-4 py-5 my-5 text-center">
+        <h1 class="display-7 fw-bold mb-3">Crear Movimiento</h1>
+        <form class="d-flex flex-column gap-3" th:action="@{/minticspring_boot/movimientos/insertarMovimiento}" th:method="post" th:object="${crearmovimiento}">
+            <div class="textinonerow">
+                <p style="margin:0; font-family: 'Nunito Sans', sans-serif;">Concepto</p><input th:field="*{concept}" class="form-control" type="text" placeholder="Introduzca concepto"/>
+            </div>
+            <div class="textinonerow">
+                <p style="margin:0; font-family: 'Nunito Sans', sans-serif;">Cantidad</p><input th:field="*{amount}" class="form-control" type="text" placeholder="Introduzca la cantidad"/>
+            </div>
+            <!--<div class="textinonerow">
+                <p style="margin:0; font-family: 'Nunito Sans', sans-serif;">Fecha de Creación</p><input th:field="*{createdAt}" class="from-control" type="date"/>
+            </div>
+            <div class="textinonerow">
+                <p style="margin:0; font-family: 'Nunito Sans', sans-serif;">Fecha de Actualización</p><input th:field="*{updateAt}" class="from-control" type="date"/>
+            </div>-->
 
-        <div class="d-flex flex-column align-items-center px-4 py-5 my-5 text-center">
-            <h1 class="display-7 fw-bold mb-3">Crear Movimiento</h1>
-            <form class="d-flex flex-column gap-3" th:action="@{/minticspring_boot/movimientos/insertarMovimiento}" th:method="post" th:object="${crearmov}">
-                <input  type="text" th:field="*{concept}" />
-                <!--<input th:field="*{amount}" class="form-control" type="number"  placeholder="Monto"/>
-                </input type=" date " th:field="*{createdAt}" class="form-control" placeholder="Fecha de creación"/>
-                </input type=" date " th:field="*{updateAt}" class="form-control" placeholder="Fecha de actualización"/>
+            <button class="btn btn-primary" type="submit"> Crear</button>
+        </form>
 
--->
-                <button class="btn btn-primary" type="submit"> Crear</button>
-            </form>
+    </div>
 
-        </div>
+</main>
 
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

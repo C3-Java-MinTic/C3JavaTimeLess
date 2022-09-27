@@ -26,6 +26,7 @@ public class FrontEndController {
 
     @Autowired
     private EmpleadoService empleadoService;
+    @Autowired
     private MovimientoDineroService movimientoDineroService;
 
     @GetMapping(path="/")
@@ -91,6 +92,13 @@ public class FrontEndController {
 
         return "crearMovimiento";
 
+    }
+
+    @GetMapping(path ="/editarMovimiento/{id}")
+    public String editarMovimiento (Model modelo, @PathVariable("id") Long id){
+        MovimientoDinero movtemp = movimientoDineroService.buscarMovimienotId(id);
+        modelo.addAttribute("editarmov", movtemp);
+        return "editarMovimiento";
     }
 
 }
