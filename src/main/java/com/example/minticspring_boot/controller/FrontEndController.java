@@ -4,6 +4,7 @@ package com.example.minticspring_boot.controller;
 import java.util.List;
 
 import com.example.minticspring_boot.domain.MovimientoDinero;
+import com.example.minticspring_boot.services.EmpresaService;
 import com.example.minticspring_boot.services.MovimientoDineroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class FrontEndController {
     private EmpleadoService empleadoService;
     @Autowired
     private MovimientoDineroService movimientoDineroService;
+
+    @Autowired
+    private EmpresaService empresaService;
 
     @GetMapping(path="/")
     public String home(){
@@ -88,8 +92,11 @@ public class FrontEndController {
     @GetMapping(path ="/crearMovimiento")
     public String crearMovimiento (Model modelo){
 
+        List<Empleado> listEmpleado = empleadoService.obtenerTodosLosEmpleados();
+        List<Empresa> listEmpresa = empresaService.getAllEmpresas();
+        modelo.addAttribute("empleados", listEmpleado);
+        modelo.addAttribute("empresas",listEmpresa);
         modelo.addAttribute("crearmovimiento", new MovimientoDinero());
-
         return "crearMovimiento";
 
     }
