@@ -19,6 +19,15 @@
             <input th:field="*{concept}" class="form-control" type="text" placeholder="Concepto"/>
             <input th:field="*{amount}" class="form-control" type="text" placeholder="Concepto"/>
             <input th:field="*{id}" type="hidden"/>
+            <p style="margin:0; font-family: 'Nunito Sans', sans-serif;">Fecha de Creacion</p><input  type="date" th:field="*{createdAt}" class="from-control"/>
+            <p style="margin:0; font-family: 'Nunito Sans', sans-serif;">Fecha de Actualizacion</p><input  type="date" th:field="*{updateAt}" class="from-control"/>
+            <select th:field="*{idEmpresa}" class="form-select">
+                <option th:each="itemEmpresa: ${empresas}" th:value ="${itemEmpresa.id}" th:text = "${itemEmpresa.name}"></option>
+            </select>
+
+            <select th:field="*{idEmpleado}" class="form-select">
+                <option th:each="itemEmpleado: ${empleados}" th:value ="${itemEmpleado.id}" th:text = "${itemEmpleado.email}"></option>
+            </select>
             <button class="btn btn-primary" type="submit"> Editar</button>
         </form>
 

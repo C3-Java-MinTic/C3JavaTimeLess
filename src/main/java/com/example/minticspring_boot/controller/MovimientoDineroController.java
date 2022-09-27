@@ -78,6 +78,8 @@ public class MovimientoDineroController {
             movimientoDinero1.setAmount(movimientoDinero.getAmount());
             movimientoDinero1.setUpdateAt(movimientoDinero.getUpdateAt());
             movimientoDinero1.setCreatedAt(movimientoDinero.getCreatedAt());
+            movimientoDinero1.setIdEmpleado(movimientoDinero.getIdEmpleado());
+            movimientoDinero.setIdEmpresa(movimientoDinero.getIdEmpresa());
             return new ResponseEntity<MovimientoDinero>(movimientoDineroService.crearNuevoMovimiento(movimientoDinero1), HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

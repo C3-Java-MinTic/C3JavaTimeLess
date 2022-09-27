@@ -104,6 +104,10 @@ public class FrontEndController {
     @GetMapping(path ="/editarMovimiento/{id}")
     public String editarMovimiento (Model modelo, @PathVariable("id") Long id){
         MovimientoDinero movtemp = movimientoDineroService.buscarMovimienotId(id);
+        List<Empleado> listEmpleado = empleadoService.obtenerTodosLosEmpleados();
+        List<Empresa> listEmpresa = empresaService.getAllEmpresas();
+        modelo.addAttribute("empleados", listEmpleado);
+        modelo.addAttribute("empresas",listEmpresa);
         modelo.addAttribute("editarmov", movtemp);
         return "editarMovimiento";
     }
