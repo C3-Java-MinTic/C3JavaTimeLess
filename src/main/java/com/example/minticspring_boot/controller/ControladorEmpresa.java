@@ -64,7 +64,6 @@ public class ControladorEmpresa {
      modelo.addAttribute(empresa);
      if (empresaService.crearNuevaEmpresa(empresa).equals(Boolean.TRUE)){
         return new RedirectView("/intro");
-
      }else{
         return new RedirectView("/error");
      }

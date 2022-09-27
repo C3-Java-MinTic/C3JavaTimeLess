@@ -37,10 +37,9 @@ public class MovimientoDineroController {
 
     //Metodo para crear un nuevo movimiento desde frontend
     @PostMapping(path = "/insertarMovimiento")
-    public RedirectView insertarMovimiento(@ModelAttribute MovimientoDinero movimientoDinero, Model modelo){
+    public void insertarMovimiento(@ModelAttribute MovimientoDinero movimientoDinero, Model modelo){
         modelo.addAttribute(movimientoDinero);
         movimientoDineroService.crearNuevoMovimiento(movimientoDinero);
-        return new RedirectView("/intro");
     }
 
     //Metodo Get para listar todos los movimientos
