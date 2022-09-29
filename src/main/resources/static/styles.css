@@ -13,3 +13,25 @@
 .textinonerow .texttwo{
     font-size:15px;
 }
+
+.background-nav{
+    background: rgb(128,128,128);
+    background: radial-gradient(circle, rgba(128,128,128,1) 0%, rgba(128,128,128,1) 100%);
+}
+
+.nav-link{
+    color:#000;
+}
+
+.nav-link:hover{
+    background-color: #2C3E50;
+    color:#ffffff;
+
+}
+
+.hoverlink:hover{
+    background-color: #2C3E50;
+    color:#ffffff;
+
+}
+

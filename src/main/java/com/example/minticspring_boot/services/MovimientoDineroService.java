@@ -1,6 +1,5 @@
 package com.example.minticspring_boot.services;
 
-import com.example.minticspring_boot.domain.Empleado;
 import com.example.minticspring_boot.domain.MovimientoDinero;
 import com.example.minticspring_boot.repository.MovimientoDineroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +32,19 @@ public class MovimientoDineroService {
         movimientoDineroRepository.delete(movimientoDinero);
     }
 
+    //Eliminar un movimiento de dinero por id
+    public void borrarMovimientoById(Long id){
+        movimientoDineroRepository.deleteById(id);
+    }
+
     //Buscar un movimiento por id
     public Optional<MovimientoDinero> encontrarMovimientoPorId(Long id){
         return movimientoDineroRepository.findById(id);
+    }
+    public MovimientoDinero buscarMovimienotId(Long id){
+
+        MovimientoDinero movTemp = movimientoDineroRepository.findById(id).orElse(null);
+
+        return movTemp;
     }
 }

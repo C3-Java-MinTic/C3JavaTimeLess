@@ -19,6 +19,9 @@ public class EmpleadoService {
     private EmpleadoRepository empleadoRepository;
 
     @Autowired
+    private EmpresaRepository empresaRepository;
+
+    @Autowired
     private PermisosRepository permisosRepository;
 
     //@Autowired
@@ -30,6 +33,7 @@ public class EmpleadoService {
 
         try {
             empleadoRepository.save(empleado);
+    
         }catch (Exception e){
 
             return Boolean.FALSE;

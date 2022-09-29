@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 @NoArgsConstructor
@@ -27,9 +30,11 @@ public class MovimientoDinero {
     private float amount;
 
     @Column(name="createdAt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
 
     @Column(name="updateAt")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updateAt;
 
     @JoinColumn(name="id_empleado", referencedColumnName = "id", updatable = true, insertable = true)

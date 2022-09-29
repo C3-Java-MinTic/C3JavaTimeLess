@@ -50,7 +50,7 @@ public class EmpleadoController {
     @DeleteMapping("/eliminarEmpleado/{id}")
     private RedirectView eliminarEmpleado(@PathVariable("id") Long id){
         empleadoService.deleteEmpleadoById(id);
-        return new RedirectView("/intro");
+        return new RedirectView("/verempleados");
     }
 
     //Obtener un empleado por id
@@ -67,7 +67,7 @@ public class EmpleadoController {
 
         modelo.addAttribute(empleado);
         if(empleadoService.crearNuevoEmpleado(empleado).equals(Boolean.TRUE)){
-            return new RedirectView("/intro");
+            return new RedirectView("/verempleados");
         } else {
 
             return new RedirectView("/error");
@@ -88,7 +88,7 @@ public class EmpleadoController {
    public RedirectView insertarEmpleadoRol(@ModelAttribute Empleado empleado, Model modelo){
      modelo.addAttribute(empleado);
      if (empleadoService.insertarEmpleadoRol(empleado).equals(Boolean.TRUE)){
-        return new RedirectView("/intro");
+        return new RedirectView("/verempleados");
 
      }else{
         return new RedirectView("/error");

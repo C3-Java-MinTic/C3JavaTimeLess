@@ -46,6 +46,13 @@ public class ControladorEmpresa {
 
     }
 
+     //Eliminar una empresa
+     @DeleteMapping("/eliminarEmpresa/{id}")
+     private RedirectView eliminarEmpresa(@PathVariable("id") Long id){
+         empresaService.deleteEmpresaById(id);
+         return new RedirectView("/verempresas");
+     }
+
     @DeleteMapping
     private ResponseEntity<Void> eliminarEmpresa (@RequestBody Empresa empresa){
         empresaService.delete(empresa);
@@ -59,11 +66,26 @@ public class ControladorEmpresa {
 
     }
 
+     //Metodo Put Actualizar una empresa
+     @PutMapping(path="/actualizarempresa")
+     public RedirectView actualizarEmpresa(@ModelAttribute Empresa empresa, Model modelo){
+ 
+         modelo.addAttribute(empresa);
+         if( empresaService.crearNuevaEmpresa(empresa).equals(Boolean.TRUE)){
+             return new RedirectView("/verempresas");
+         } else {
+ 
+             return new RedirectView("/error");
+         }
+ 
+ 
+     }
+
    @PostMapping(path = "/crearEmpresa")
    public RedirectView insertarEmpresa(@ModelAttribute Empresa empresa, Model modelo){
      modelo.addAttribute(empresa);
      if (empresaService.crearNuevaEmpresa(empresa).equals(Boolean.TRUE)){
-        return new RedirectView("/intro");
+        return new RedirectView("/verempresas");
 
      }else{
         return new RedirectView("/error");

@@ -45,6 +45,16 @@ public class EmpresaService {
         empresaRepository.delete(empresa);
     }
 
+    public void deleteEmpresaById (Long id){
+
+        empresaRepository.deleteById(id);
+    }
+    public Empresa buscarEmpresaId(Long id){
+
+        Empresa emprTemp = empresaRepository.findById(id).orElse(null);
+
+        return emprTemp;
+    }
     //Buscar una empresa por id
 
     public Optional<Empresa> findById (Long id){

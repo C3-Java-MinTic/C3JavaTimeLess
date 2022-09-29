@@ -25,6 +25,13 @@ public class Empleado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name="nombres")
+    private String nombres;
+
+
+    @Column(name="phone")
+    private String phone;
+
 
     @Column(name="email", unique = true)
     private String email;
